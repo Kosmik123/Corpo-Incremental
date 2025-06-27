@@ -6,31 +6,34 @@ namespace CorpoIncremental
 {
     public partial class MainWindow : GameWindow
     {
-        public MainWindow()
+        public Game Game { get; }
+
+        public MainWindow(Game game)
         {
             InitializeComponent();
-            MoneyText.Text = Game.Instance.GetMoneyText();
+            Game = game;
+            MoneyText.Text = Game.GetMoneyText();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Game.Instance.Player.OnMoneyChanged += UpdateMoneyLabel;
+            Game.Player.OnMoneyChanged += UpdateMoneyLabel;
         }
 
         private void WorkstationMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            var workstationWindow = new WorkstationWindow();
+            var workstationWindow = new WorkstationWindow(Game);
             workstationWindow.Show();
         }
 
         private void UpdateMoneyLabel()
         {
-            MoneyText.Text = $"{Game.Instance.GetMoneyText()}";
+            MoneyText.Text = $"{Game.GetMoneyText()}";
         }
 
         private void Window_Unloaded(object sender, RoutedEventArgs e)
         {
-            Game.Instance.Player.OnMoneyChanged -= UpdateMoneyLabel;
+            Game.Player.OnMoneyChanged -= UpdateMoneyLabel;
         }
 
         protected override void OnClosing(CancelEventArgs e)
@@ -41,7 +44,7 @@ namespace CorpoIncremental
 
         private void SaveGame()
         {
-            Game.Instance.Save();
+            Game.Save();
         }
     }
 }

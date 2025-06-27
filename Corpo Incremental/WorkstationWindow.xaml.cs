@@ -15,8 +15,11 @@ namespace CorpoIncremental
 
         private float workSpeed = 0.37f;
 
-        public WorkstationWindow()
+        public Game Game { get; }
+
+        public WorkstationWindow(Game game)
         {
+            Game = game;
             InitializeComponent();
             StopWorking();
         }
@@ -48,7 +51,7 @@ namespace CorpoIncremental
         private void FinishWorking()
         {
             StopWorking();
-            Game.Instance.Player.DoWork(moneyPerClick);
+            Game.Player.DoWork(moneyPerClick);
         }
 
         private void StopWorking()

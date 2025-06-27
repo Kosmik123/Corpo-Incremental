@@ -11,7 +11,6 @@ public class GameWindow : Window
 
 	protected override void OnContentRendered(EventArgs e)
 	{
-		Debug.WriteLine("Open");
 		base.OnContentRendered(e);
 		openWindows.Add(this);
 	}

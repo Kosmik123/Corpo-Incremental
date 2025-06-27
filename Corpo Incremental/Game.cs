@@ -2,58 +2,63 @@
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Windows;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace CorpoIncremental
+namespace CorpoIncremental;
+
+public class Game
 {
-	public class GameController
-    {
-        private readonly GameEvent[] gameEvents = 
-		{
-            //new GameEvent(new MoneyAchievedTrigger(Game.Instance.Player, 0.10), null)
-		};
-    }
+    public Player Player { get; private set; }
 
-    public class Game
-    {
-        public static Game Instance { get; } = new Game();
+    private readonly IServiceProvider _serviceProvider;
+    private readonly IGameSaveService _gameSaveService;
 
-        public Player Player { get; }
-
-        private readonly JsonSerializerOptions saveSerializerOptions = new()
+    private readonly JsonSerializerOptions saveSerializerOptions = new()
 		{
 			WriteIndented = true
 		};
 
-        private static string FilePath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CorpoIncremental", "save.json");
+    private static string FilePath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CorpoIncremental", "save.json");
 
-        private Game()
+    public Game(IServiceProvider serviceProvider, IGameSaveService gameSaveService)
+    {
+        _serviceProvider = serviceProvider;
+        _gameSaveService = gameSaveService; 
+    }
+
+    public string GetMoneyText() => $"{Player.Money:0.###}$";
+
+    public void Start()
+    {
+        Player = LoadPlayer();
+        Window? firstWindow = (Player.Money < 10)
+            ? _serviceProvider.GetService<WorkstationWindow>()
+            : _serviceProvider.GetService<MainWindow>();
+        firstWindow?.Show();
+    }
+
+    public async void Save()
+    {
+        await Task.Run(SavePlayerToFile);
+        void SavePlayerToFile()
         {
-            Player = LoadPlayer();
-        }
-
-        public string GetMoneyText() => $"{Player.Money:0.###}$";
-
-        public async void Save()
-        {
-            await Task.Run(SavePlayerToFile);
-            void SavePlayerToFile()
-            {
-                var data = JsonSerializer.Serialize(Player.Money, saveSerializerOptions);
-                var directory = Directory.CreateDirectory(Path.GetDirectoryName(FilePath) ?? string.Empty);
-                if (directory.Exists)
-                    File.WriteAllText(FilePath, data);
-            }
-        }
-
-        private static Player LoadPlayer()
-        {
-            double money = 0;
-            if (File.Exists(FilePath))
-            {
-                var data = File.ReadAllText(FilePath);
-                money = JsonSerializer.Deserialize<double>(data);
-            }
-            return new Player(money); 
+            var data = JsonSerializer.Serialize(Player.Money, saveSerializerOptions);
+            var directory = Directory.CreateDirectory(Path.GetDirectoryName(FilePath) ?? string.Empty);
+            if (directory.Exists)
+                File.WriteAllText(FilePath, data);
         }
     }
+
+    private Player LoadPlayer()
+    {
+        double money = 0;
+        if (File.Exists(FilePath))
+        {
+            var data = File.ReadAllText(FilePath);
+            money = JsonSerializer.Deserialize<double>(data);
+        }
+        return new Player(money); 
+    }
+
 }
