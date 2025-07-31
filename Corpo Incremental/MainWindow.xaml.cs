@@ -6,6 +6,7 @@ namespace CorpoIncremental
 {
     public partial class MainWindow : GameWindow
     {
+
         public Game Game { get; }
 
         public MainWindow(Game game)
