@@ -14,7 +14,7 @@ public static class GameEngine
 		gameTimer.Tick += GameTimer_Tick;
 	}
 
-	private static readonly DispatcherTimer gameTimer = new DispatcherTimer
+	private static readonly DispatcherTimer gameTimer = new()
 	{
 		Interval = TimeSpan.FromMilliseconds(Time.DeltaTimeMiliseconds)
 	};
