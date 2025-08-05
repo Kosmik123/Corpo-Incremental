@@ -15,14 +15,18 @@ public partial class App : Application
 			.ConfigureServices((context, services) =>
 			{
 				services.AddSingleton<Game>();
-				services.AddTransient<MainWindow>();
-				services.AddTransient<WorkstationWindow>();
 				services.AddSingleton<IGameSaveService, GameSaveService>();
+				AddWindows(services);
             })
 			.Build();
     }
 
-    protected override async void OnStartup(StartupEventArgs e)
+	private static void AddWindows(IServiceCollection services)
+	{
+		services.AddSingleton<DistanceWindow>();
+	}
+
+	protected override async void OnStartup(StartupEventArgs e)
 	{
 		GameEngine.Start();
 		Utils.SetDropDownMenuToBeRightAligned();

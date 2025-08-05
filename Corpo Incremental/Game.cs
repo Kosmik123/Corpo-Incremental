@@ -32,9 +32,8 @@ public class Game
     public void Start()
     {
         Player = LoadPlayer();
-        Window? firstWindow = (Player.Money < 10)
-            ? _serviceProvider.GetService<WorkstationWindow>()
-            : _serviceProvider.GetService<MainWindow>();
+
+        Window? firstWindow = _serviceProvider.GetService<DistanceWindow>();
         firstWindow?.Show();
     }
 
