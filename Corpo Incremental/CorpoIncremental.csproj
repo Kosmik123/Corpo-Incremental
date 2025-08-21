@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\UnitsIncremental\UnitsIncremental.csproj" />
     <ProjectReference Include="..\WPFGameEngine\WPFGameEngine.csproj" />
   </ItemGroup>
 

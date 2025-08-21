@@ -4,8 +4,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.13.35806.99
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CorpoIncremental", "Corpo Incremental\CorpoIncremental.csproj", "{1CB24791-622E-47C3-A5E1-FE23214FD20B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BC47B929-6A96-422A-8102-EB9C787CB192} = {BC47B929-6A96-422A-8102-EB9C787CB192}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFGameEngine", "WPFGameEngine\WPFGameEngine.csproj", "{D399958D-4FFD-47FC-A54B-86205BE00232}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitsIncremental", "UnitsIncremental\UnitsIncremental.csproj", "{BC47B929-6A96-422A-8102-EB9C787CB192}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +26,10 @@ Global
 		{D399958D-4FFD-47FC-A54B-86205BE00232}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D399958D-4FFD-47FC-A54B-86205BE00232}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D399958D-4FFD-47FC-A54B-86205BE00232}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC47B929-6A96-422A-8102-EB9C787CB192}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC47B929-6A96-422A-8102-EB9C787CB192}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC47B929-6A96-422A-8102-EB9C787CB192}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC47B929-6A96-422A-8102-EB9C787CB192}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
