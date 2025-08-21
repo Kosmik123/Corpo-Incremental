@@ -12,6 +12,8 @@ public class GameWindow : Window, IGameWindow
 	{
 		base.OnContentRendered(e);
 		IGameWindow.openWindows.Add(this);
+		if (this is IUpdatableWindow updatable)
+			GameEngine.OnUpdate += updatable.Update;
 	}
 
 	protected override void OnClosing(CancelEventArgs e)
@@ -30,6 +32,8 @@ public class GameWindow : Window, IGameWindow
 		Debug.WriteLine("Close");
 		base.OnClosed(e);
 		IGameWindow.openWindows.Remove(this);
+		if (this is IUpdatableWindow updatable)
+			GameEngine.OnUpdate -= updatable.Update;
 	}
 }
 

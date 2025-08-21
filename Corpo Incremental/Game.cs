@@ -15,9 +15,9 @@ public class Game
     private readonly IGameSaveService _gameSaveService;
 
     private readonly JsonSerializerOptions saveSerializerOptions = new()
-		{
-			WriteIndented = true
-		};
+	{
+		WriteIndented = true
+	};
 
     private static string FilePath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CorpoIncremental", "save.json");
 

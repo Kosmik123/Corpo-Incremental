@@ -30,12 +30,12 @@
         <Label Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="DemiBold" FontSize="36" >
             Meters
         </Label>
+        
 
-        <Label Grid.Column="2" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" >
+        <Label x:Name="MetersDisplay" Grid.Column="2" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" >
             0m
         </Label>
         
-        <ScrollBar Grid.Column="2" Grid.Row="4" Orientation="Horizontal" Width="100" Cursor="Hand" Margin="10" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ViewportSize="40" Maximum="100">
-        </ScrollBar>
+        <ScrollBar x:Name="MetersScrollBar" Grid.Column="2" Grid.Row="4" Orientation="Horizontal" Width="100" Cursor="Hand" Margin="10" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ViewportSize="40" Maximum="100"/>
     </Grid>
 </local:GameWindow>
