@@ -9,11 +9,13 @@ namespace CorpoIncremental
     public partial class WorkstationWindow : GameWindow
     {
         private readonly DispatcherTimer workTimer = new();
-        private float workProgress;
+        private float01 workProgress;
 
         private double moneyPerClick = 0.01;
 
         private float workSpeed = 0.37f;
+
+        private const float timerInterval = 20;
 
         public Game Game { get; }
 
@@ -33,7 +35,7 @@ namespace CorpoIncremental
 
         private void StartWorking()
         {
-            workTimer.Interval = TimeSpan.FromMilliseconds(Time.DeltaTimeMiliseconds);
+            workTimer.Interval = TimeSpan.FromMilliseconds(timerInterval);
             workTimer.Start();
             WorkButton.IsEnabled = false;
             WorkButton.Content = "Working...";
@@ -42,7 +44,7 @@ namespace CorpoIncremental
 
         private void WorkTimer_Tick(object? sender, EventArgs e)
         {
-            workProgress += workSpeed * Time.DeltaTime;
+            workProgress += workSpeed * timerInterval;
             WorkProgressBar.Value = workProgress * WorkProgressBar.Maximum;
             if (workProgress >= 1)
                 FinishWorking();
@@ -56,7 +58,7 @@ namespace CorpoIncremental
 
         private void StopWorking()
         {
-            workTimer.Stop();
+            workTimer.Stop(); 
             workProgress = 0;
             WorkProgressBar.Value = 0;
             WorkButton.Content = $"Work (+{moneyPerClick:0.##}$)";
