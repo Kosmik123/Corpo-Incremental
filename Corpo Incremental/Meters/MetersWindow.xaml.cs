@@ -25,7 +25,7 @@ public partial class MetersWindow : GameWindow, IUpdatableWindow
 
 	private void MetersController_OnChanged()
 	{
-		MetersDisplay.Content = $"{data.Distance}m";
+		MetersDisplay.Content = data.DistanceFormatted;
 	}
 
 	public void OnUpdate()
@@ -43,10 +43,7 @@ public partial class MetersWindow : GameWindow, IUpdatableWindow
 		}
 	}
 
-	private void Increment()
-	{
-		data.Increment();
-	}
+	private void Increment() => data.Increment();
 
 
 	private void GameWindow_Unloaded(object sender, System.Windows.RoutedEventArgs e)

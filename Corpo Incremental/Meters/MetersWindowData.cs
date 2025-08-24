@@ -9,7 +9,7 @@ public class MetersWindowData
 	private readonly MetersController _metersController;
 	public MetersController MetersController => _metersController;
 
-	public string Distance => _metersController.Distance.ToString("0.##");
+	public string DistanceFormatted => $"{_metersController.Distance:0.##}m";
 
 	public MetersWindowData(MetersController metersController)
 	{

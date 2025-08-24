@@ -13,42 +13,31 @@
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="20" />
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <Button Width="200" Margin="10">
+                Meters
+            </Button>
 
-        <Menu FontSize="14">
-            <MenuItem Header="_Work">
-                <MenuItem x:Name="WorkstationMenuItem" Header="_Workstation" Click="WorkstationMenuItem_Click" />
-            </MenuItem>
-            <MenuItem Header="_Edit" Visibility="Collapsed">
-                <MenuItem Header="_Settings"/>
-            </MenuItem>
-            <MenuItem Header="_Help" Visibility="Collapsed">
-                <MenuItem Header="_About" />
-            </MenuItem>
-        </Menu>
-
-        <Grid Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="30" />
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="20" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="20" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="auto" />
-                <ColumnDefinition Width="auto" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="20" />
-            </Grid.ColumnDefinitions>
-
-            <TextBlock Grid.Row="1" Grid.Column="2" Margin="0,0,10,0"><Run Text="Balance:"/></TextBlock>
-            <TextBox Grid.Row="1" Grid.Column="3" x:Name="MoneyText" 
-                     IsReadOnly="True" Width="120" />
-        </Grid>
+            <Button Width="200" Margin="10">
+                Seconds
+            </Button>
+            
+            
+            
+            
+        </StackPanel>        
+        
+        
+        
     </Grid>
 </local:GameWindow>

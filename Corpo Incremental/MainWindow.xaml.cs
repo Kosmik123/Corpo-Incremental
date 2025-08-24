@@ -13,7 +13,6 @@ namespace CorpoIncremental
         {
             InitializeComponent();
             Game = game;
-            MoneyText.Text = Game.GetMoneyText();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -21,13 +20,8 @@ namespace CorpoIncremental
             Game.Player.OnMoneyChanged += UpdateMoneyLabel;
         }
 
-        private void WorkstationMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-        }
-
         private void UpdateMoneyLabel()
         {
-            MoneyText.Text = $"{Game.GetMoneyText()}";
         }
 
         private void Window_Unloaded(object sender, RoutedEventArgs e)

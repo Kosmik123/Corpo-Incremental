@@ -1,12 +1,13 @@
-﻿<local:GameWindow x:Class="CorpoIncremental.Meters.MetersWindow"
+﻿<engine:GameWindow x:Class="CorpoIncremental.Meters.MetersWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WPFGameEngine;assembly=WPFGameEngine"
+        xmlns:local="clr-namespace:CorpoIncremental"
+        xmlns:engine="clr-namespace:WPFGameEngine;assembly=WPFGameEngine"
         mc:Ignorable="d"
         MinHeight="240" MinWidth="300"
-        Title="Distance" Height="300" Width="400"
+        Title="Distance" Height="3000" Width="400"
         FontSize="18" Loaded="GameWindow_Loaded" Unloaded="GameWindow_Unloaded">
     <Grid>
         <Grid.RowDefinitions>
@@ -21,46 +22,57 @@
         </Grid.ColumnDefinitions>
         <ScrollViewer 
             Grid.Row="1" Grid.Column="1"
-            VerticalScrollBarVisibility="Auto"
-            HorizontalScrollBarVisibility="Auto">
+            VerticalScrollBarVisibility="Hidden"
+            HorizontalScrollBarVisibility="Hidden">
             <ScrollViewer.Resources>
                 <Style TargetType="ScrollBar">
                     <Setter Property="Width" Value="20"/>
                     <Setter Property="Height" Value="20"/>
                 </Style>
             </ScrollViewer.Resources>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="2*"/>
-
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="auto" MinWidth="200"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+            <StackPanel>
+                <Label VerticalAlignment="Center" HorizontalAlignment="Center" 
+                       FontWeight="DemiBold" FontSize="36" >
+                    Meters
+                </Label>
 
 
-                <Label Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="DemiBold" FontSize="36" >
-            Meters
-        </Label>
+                <Label x:Name="MetersDisplay"  FontSize="30"
+                       VerticalAlignment="Center" HorizontalAlignment="Center" >
+                    0m
+                </Label>
 
-
-        <Label x:Name="MetersDisplay" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" >
-            0m
-        </Label>
-
-        <ScrollBar x:Name="MetersScrollBar" Grid.Column="1" Grid.Row="3"
+                <ScrollBar x:Name="MetersScrollBar"
                    Orientation="Horizontal" Width="80" Cursor="Hand" Margin="10" 
                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
                    Maximum="100" ViewportSize="70"/>
+
+                <TabControl BorderThickness="0" SelectedIndex="0">
+                    <TabItem Header="Updrades" Visibility="Hidden">
+                        <StackPanel Margin="10">
+                            <TextBlock FontSize="24" FontWeight="Bold"
+                                       TextAlignment="Center" Margin="0,0,0,20">
+                                Upgrades
+                            </TextBlock>
+                            <local:UpgradeButton BuyButtonText="Scroll Bar Length" SellButtonVisibility="Collapsed" />
+                        </StackPanel>
+                    </TabItem>
+
+                    <TabItem Header="Derivatives" Visibility="Collapsed">
+                        <StackPanel Margin="10">
+                            <TextBlock Text="Settings area" FontSize="16"/>
+                            <CheckBox Content="Enable notifications"/>
+                            <CheckBox Content="Dark mode"/>
+                        </StackPanel>
+                    </TabItem>
+
+                    <TabItem Header="Dimensions" Visibility="Collapsed">
+                        <TextBlock Text="This is the About tab." 
+                           FontSize="16" VerticalAlignment="Center" 
+                           HorizontalAlignment="Center"/>
+                    </TabItem>
+                </TabControl>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
-    </ScrollViewer>
-    </Grid>
-    
-    
-</local:GameWindow>
+</engine:GameWindow>
