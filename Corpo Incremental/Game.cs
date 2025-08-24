@@ -1,9 +1,12 @@
-﻿using System;
+﻿using CorpoIncremental.Meters;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
-using Microsoft.Extensions.DependencyInjection;
+using UnitsIncremental;
+using WPFGameEngine;
 
 namespace CorpoIncremental;
 
@@ -13,18 +16,21 @@ public class Game
 
     private readonly IServiceProvider _serviceProvider;
     private readonly IGameSaveService _gameSaveService;
+    private readonly IUnitController[] unitControllers;
 
     private readonly JsonSerializerOptions saveSerializerOptions = new()
 	{
 		WriteIndented = true
 	};
 
+
     private static string FilePath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CorpoIncremental", "save.json");
 
     public Game(IServiceProvider serviceProvider, IGameSaveService gameSaveService)
     {
         _serviceProvider = serviceProvider;
-        _gameSaveService = gameSaveService; 
+        _gameSaveService = gameSaveService;
+        unitControllers = [.. _serviceProvider.GetServices<IUnitController>()];
     }
 
     public string GetMoneyText() => $"{Player.Money:0.###}$";
@@ -33,11 +39,19 @@ public class Game
     {
         Player = LoadPlayer();
 
-        Window? firstWindow = _serviceProvider.GetService<DistanceWindow>();
+        GameEngine.OnUpdate += GameEngine_OnUpdate;
+        
+        Window? firstWindow = _serviceProvider.GetService<MetersWindow>();
         firstWindow?.Show();
     }
 
-    public async void Save()
+	private void GameEngine_OnUpdate()
+	{
+        foreach (var unitController in unitControllers)
+            unitController.Tick(Time.DeltaTime);
+	}
+
+	public async void Save()
     {
         await Task.Run(SavePlayerToFile);
         void SavePlayerToFile()

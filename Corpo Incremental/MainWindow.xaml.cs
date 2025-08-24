@@ -23,8 +23,6 @@ namespace CorpoIncremental
 
         private void WorkstationMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            var workstationWindow = new WorkstationWindow(Game);
-            workstationWindow.Show();
         }
 
         private void UpdateMoneyLabel()

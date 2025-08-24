@@ -13,16 +13,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WPFGameEngine;
 
-namespace CorpoIncremental
+namespace CorpoIncremental.Seconds;
+
+/// <summary>
+/// Interaction logic for SecondsWindow.xaml
+/// </summary>
+public partial class SecondsWindow : GameWindow
 {
-	/// <summary>
-	/// Interaction logic for SecondsWindow.xaml
-	/// </summary>
-	public partial class SecondsWindow : GameWindow
+	public SecondsWindow()
 	{
-		public SecondsWindow()
-		{
-			InitializeComponent();
-		}
+		InitializeComponent();
 	}
 }
