@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace UnitsIncremental
 {
-    public class MetersController
+    public class MetersController : IUnitController
     {
-        private readonly List<double> consecutiveDerivatives = new List<double>();
+        public event System.Action OnChanged;
         
         public double Distance
         {
@@ -45,16 +44,27 @@ namespace UnitsIncremental
                     consecutiveDerivatives.Add(0);
 
             consecutiveDerivatives[order] = value;
+            changed = true;
         }
 
-        public void Tick()
+        public void Tick(double deltaTime)
         {
+            double halfDeltaTime = deltaTime * 0.5f;
             int lastOrder = consecutiveDerivatives.Count - 1;
             for (int i = lastOrder; i > 0; i--)
-                consecutiveDerivatives[i - 1] += 0.5 * consecutiveDerivatives[i];
+                consecutiveDerivatives[i - 1] += consecutiveDerivatives[i] * halfDeltaTime;
 
             for (int i = 1; i < lastOrder - 1; i++)
-                consecutiveDerivatives[i - 1] += 0.5 * consecutiveDerivatives[i];
+                consecutiveDerivatives[i - 1] += consecutiveDerivatives[i] * halfDeltaTime;
+            
+            if (changed)
+            {
+                changed = false;
+                OnChanged?.Invoke();
+            }        
         }
+
+        private readonly List<double> consecutiveDerivatives = new List<double>();
+        private bool changed = true;
     }
 }
