@@ -26,7 +26,7 @@ public static class GameEngine
 		var deltaTime = currentTime - lastUpdateTime;
 		double deltaTimeSeconds = deltaTime.TotalSeconds;
 
-		Time.DeltaTimeDouble = deltaTimeSeconds;
+		Time.UnscaledDeltaTimeDouble = deltaTimeSeconds;
 		lastUpdateTime = currentTime;
 		OnUpdate.Invoke();
 	}
