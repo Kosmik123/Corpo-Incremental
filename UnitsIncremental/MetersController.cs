@@ -8,11 +8,23 @@ namespace UnitsIncremental
         
         public double Distance
         {
-            get => GetDerivative(0);
-            set => SetDerivative(0, value);
+            get => GetDimension(1);
+            set => SetDimension(1, value);
         }
         
-        public double Speed
+        public double Area
+        {
+            get => GetDimension(2);
+            set => SetDimension(2, value);
+		}
+
+        public double Volume
+        {
+            get => GetDimension(3);
+            set => SetDimension(3, value);
+		}
+
+		public double Speed
         {
             get => GetDerivative(1);
             set => SetDerivative(1, value);
@@ -24,30 +36,56 @@ namespace UnitsIncremental
             set => SetDerivative(2, value);
         }
 
-        private double GetDerivative(int order)
+        public double Jolt
         {
-            if (consecutiveDerivatives.Count > 0)
-            {
-                return consecutiveDerivatives[order];
-            }
-            else
-            {
-                return 0;
-            }
+            get => GetDerivative(3);
+            set => SetDerivative(3, value);
         }
 
-        private void SetDerivative(int order, double value)
-        {
-            int lastOrder = consecutiveDerivatives.Count - 1;
-            if (lastOrder < order)
-                for (int i = 0; i < order - lastOrder; i++)
-                    consecutiveDerivatives.Add(0);
+		private double GetDerivative(int order) => GetFromList(consecutiveDerivatives, order);
+		private double GetDimension(int order) => GetFromList(consecutiveDimensions, order);
 
-            consecutiveDerivatives[order] = value;
-            changed = true;
-        }
+		private static double GetFromList(IReadOnlyList<double> list, int order)
+		{
+			order = ValidateOrder(order);
+			if (order < list.Count)
+			{
+				return list[order];
+			}
+			else
+			{
+				return 0;
+			}
+		}
 
-        public void Tick(double deltaTime)
+		private void SetDerivative(int order, double value) => SetInList(consecutiveDerivatives, order, value);
+		private void SetDimension(int order, double value) => SetInList(consecutiveDimensions, order, value);
+
+		private void SetInList(IList<double> list, int order, double value)
+		{
+			order = ValidateOrder(order);
+
+			EnsureIndexExistsInList(list, order);
+			list[order] = value;
+			changed = true;
+		}
+
+		private static int ValidateOrder(int order)
+		{
+			if (order <= 0)
+				throw new System.ArgumentOutOfRangeException(nameof(order), "Order must be greater than 0.");
+			return order - 1;
+		}
+
+		private static void EnsureIndexExistsInList(IList<double> list, int order)
+		{
+			int lastOrder = list.Count - 1;
+			if (lastOrder < order)
+				for (int i = 0; i < order - lastOrder; i++)
+					list.Add(0);
+		}
+
+		public void Tick(double deltaTime)
         {
             double halfDeltaTime = deltaTime * 0.5f;
             int lastOrder = consecutiveDerivatives.Count - 1;
@@ -64,7 +102,8 @@ namespace UnitsIncremental
             }        
         }
 
-        private readonly List<double> consecutiveDerivatives = new List<double>();
+        private readonly List<double> consecutiveDimensions = new List<double>();
+		private readonly List<double> consecutiveDerivatives = new List<double>();
         private bool changed = true;
     }
 }
