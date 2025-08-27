@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data;
 
 namespace UnitsIncremental
 {
@@ -91,6 +92,8 @@ namespace UnitsIncremental
             int lastOrder = consecutiveDerivatives.Count - 1;
             for (int i = lastOrder; i > 0; i--)
                 consecutiveDerivatives[i - 1] += consecutiveDerivatives[i] * halfDeltaTime;
+
+            Distance += Speed * deltaTime;
 
             for (int i = 1; i < lastOrder - 1; i++)
                 consecutiveDerivatives[i - 1] += consecutiveDerivatives[i] * halfDeltaTime;
