@@ -7,7 +7,7 @@
         xmlns:engine="clr-namespace:WPFGameEngine;assembly=WPFGameEngine"
         mc:Ignorable="d"
         MinHeight="240" MinWidth="300"
-        Title="Distance" Height="3000" Width="400"
+        Title="Distance" Height="1300" Width="400"
         FontSize="18" Loaded="GameWindow_Loaded" Unloaded="GameWindow_Unloaded">
     <Grid>
         <Grid.RowDefinitions>
@@ -48,13 +48,15 @@
                    Maximum="100" ViewportSize="70"/>
 
                 <TabControl BorderThickness="0" SelectedIndex="0">
-                    <TabItem Header="Updrades" Visibility="Hidden">
+                    <TabItem Header="Upgrades" Visibility="Hidden">
                         <StackPanel Margin="10">
                             <TextBlock FontSize="24" FontWeight="Bold"
                                        TextAlignment="Center" Margin="0,0,0,20">
                                 Upgrades
                             </TextBlock>
-                            <local:UpgradeButton BuyButtonText="Scroll Bar Length" SellButtonVisibility="Collapsed" />
+                            <local:UpgradePanel>
+                                
+                            </local:UpgradePanel>
                         </StackPanel>
                     </TabItem>
 
