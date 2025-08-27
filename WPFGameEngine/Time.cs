@@ -6,7 +6,7 @@
 
 		public static double DeltaTimeDouble => deltaTimeDouble;
 		public static float DeltaTime => deltaTime;
-		public static float TimeScale { get; set; }
+		public static float TimeScale { get; set; } = 1;
 		public static double UnscaledDeltaTimeDouble
 		{
 			get => unscaledDeltaTimeDouble;
