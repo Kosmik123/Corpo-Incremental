@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="CorpoIncremental.UpgradePanel"
+﻿<UserControl x:Class="CorpoIncremental.UpgradeDisplay"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -17,14 +17,14 @@
 
             <!-- Lewa strona: nazwa, level, opis -->
             <StackPanel Grid.Column="0" Orientation="Vertical">
-                <TextBlock Text="{Binding Name}" 
+                <TextBlock x:Name="headerBlock" Text="{Binding Name}" 
                            FontWeight="Bold" 
                            FontSize="14"
                            Foreground="White"/>
-                <TextBlock Text="{Binding Level}" 
+                <TextBlock x:Name="levelBlock" Text="{Binding Level}" 
                            FontSize="12"
                            Foreground="LightGray"/>
-                <TextBlock Text="{Binding Description}" 
+                <TextBlock x:Name="descriptionBlock" Text="{Binding Description}" 
                            FontSize="11"
                            TextWrapping="Wrap"
                            Foreground="LightGray"
@@ -33,10 +33,10 @@
 
             <!-- Prawa strona: przyciski -->
             <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,0,0,0">
-                <Button Content="Kup" Width="70" Height="28" Margin="0,0,0,4"
-                        Command="{Binding BuyCommand}"/>
-                <Button Content="Sprzedaj" Width="70" Height="28"
-                        Command="{Binding SellCommand}"/>
+                <Button x:Name="buyButton" Content="Buy" Width="70" Height="28" Margin="0,0,0,4"
+                        />
+                <Button x:Name="sellButton" Content="Sell" Width="70" Height="28"
+                        />
             </StackPanel>
         </Grid>
     </Border>

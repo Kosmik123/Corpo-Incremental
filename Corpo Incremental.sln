@@ -8,7 +8,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CorpoIncremental", "Corpo I
 		{BC47B929-6A96-422A-8102-EB9C787CB192} = {BC47B929-6A96-422A-8102-EB9C787CB192}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFGameEngine", "WPFGameEngine\WPFGameEngine.csproj", "{D399958D-4FFD-47FC-A54B-86205BE00232}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfGameEngine", "WPFGameEngine\WpfGameEngine.csproj", "{D399958D-4FFD-47FC-A54B-86205BE00232}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitsIncremental", "UnitsIncremental\UnitsIncremental.csproj", "{BC47B929-6A96-422A-8102-EB9C787CB192}"
 EndProject
